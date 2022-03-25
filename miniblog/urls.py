@@ -12,7 +12,7 @@ urlpatterns = [
     path('logout/', views.user_logout, name='userlogout'),
     path('signup/', views.user_signup, name='usersignup'),
     path('login/', views.user_login, name='userlogin'),
-    path('addpost/', views.add_poat, name='addpost'),
-    path('updatepost/<int:id>/', views.update_poat, name='updatepost'),
-    path('delete/<int:id>/', views.delete_poat, name='deletepost'),
+    path('addpost/', views.add_post, name='addpost'),
+    path('updatepost/<int:id>/', views.update_post, name='updatepost'),
+    path('delete/<int:id>/', views.delete_post, name='deletepost'),
 ]

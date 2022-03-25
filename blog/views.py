@@ -77,7 +77,7 @@ def user_login(request):
         return HttpResponseRedirect('/dashboard/')
 
 # Add New Post Function
-def add_poat(request):
+def add_post(request):
     if request.user.is_authenticated:
         if request.method == "POST":
             form = PostForm(request.POST)
@@ -95,7 +95,7 @@ def add_poat(request):
         return HttpResponseRedirect('/login/')
 
 # Update Post Function
-def update_poat(request, id):
+def update_post(request, id):
     if request.user.is_authenticated:
         if request.method == "POST":
             pi = Post.objects.get(pk=id)
@@ -112,7 +112,7 @@ def update_poat(request, id):
         return HttpResponseRedirect('/login/')
 
 # delete Post Function
-def delete_poat(request, id):
+def delete_post(request, id):
     if request.user.is_authenticated:
         if request.method == "POST":
             pi = Post.objects.get(pk=id)
