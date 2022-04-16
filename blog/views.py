@@ -9,6 +9,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Post
 from django.contrib.auth.models import Group
+from django.core.cache import cache
+from django.core.paginator import Paginator
+from .models import Post
 
 
 # Home Function
@@ -27,11 +30,16 @@ def contact(request):
 # Dashboard Function
 def dashboard(request):
     if request.user.is_authenticated:
-        posts = Post.objects.all()
+        posts = Post.objects.all().order_by('id')
         user = request.user
         full_name = user.get_full_name()
         gps =user.groups.all()
-        return render(request, 'blog/dashboard.html', {'posts':posts , 'full_name':full_name, 'groups':gps})
+        ip = request.session.get('ip', 0)
+        count=cache.get('count', version = user.pk)
+        paginator = Paginator(posts, 3, orphans=1)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        return render(request, 'blog/dashboard.html', {'page_obj':page_obj , 'full_name':full_name, 'groups':gps, 'ip':ip, 'count': count})
     else:
         return HttpResponseRedirect('/login/')
 
@@ -121,3 +129,5 @@ def delete_post(request, id):
             return HttpResponseRedirect('/dashboard/')
     else:
         return HttpResponseRedirect('/login/')
+
+

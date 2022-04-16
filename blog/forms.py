@@ -11,6 +11,7 @@ from .models import Post
 
 
 
+
 class SingnUpForm(UserCreationForm):
     password1 = forms.CharField(
         label='Password', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
@@ -38,8 +39,8 @@ class LoginForm(AuthenticationForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields= ['title', 'description']
-        labels = {'title':'Title', 'description':'Description'}
+        fields= ['title', 'description',]
+        labels = {'title':'Title', 'description':'Description','publish_date':'publish_date'}
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
