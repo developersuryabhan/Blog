@@ -1,8 +1,4 @@
-from imaplib import _Authenticator
-import imp
-from tokenize import group
-from turtle import title
-from unicodedata import name
+
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import SingnUpForm, LoginForm, PostForm
 from django.contrib import messages
@@ -129,5 +125,3 @@ def delete_post(request, id):
             return HttpResponseRedirect('/dashboard/')
     else:
         return HttpResponseRedirect('/login/')
-
-
